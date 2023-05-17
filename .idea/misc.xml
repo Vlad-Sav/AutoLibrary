@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/PROGRAMMING/AutoLibrary/app/src/main/res/layout/activity_main.xml" value="0.23731884057971014" />
+        <entry key="..\:/PROGRAMMING/AutoLibrary/app/src/main/res/layout/fragment_add_car.xml" value="0.18802083333333333" />
+        <entry key="..\:/PROGRAMMING/AutoLibrary/app/src/main/res/layout/fragment_cars.xml" value="0.18802083333333333" />
       </map>
     </option>
   </component>
