@@ -11,6 +11,6 @@ data class Car(
     val name: String,
     val photo: String,
     val releaseYear: Int,
-    val EngineCapacity: Int,
-    val InsertDate: Date
+    val engineCapacity: Int,
+    val insertDate: Date
     )
