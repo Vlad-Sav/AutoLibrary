@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.cardetails.CarDetailsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        tools:context=".ui.auth.RegisterFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="16dp">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/car_iv"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_car" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/car_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/car_name_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/car_iv" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/car_year_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/car_year"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/car_name_tv" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/engine_cap_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/car_engine_cap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/car_year_tv" />
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/insert_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/insert_date_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/engine_cap_tv" />
+
+        <TextView
+            android:textSize="18sp"
+            android:id="@+id/exact_car_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/car_name_tv"
+            app:layout_constraintStart_toEndOf="@+id/car_name_tv"
+            app:layout_constraintTop_toTopOf="@+id/car_name_tv" />
+        <TextView
+            android:textSize="18sp"
+            android:id="@+id/exact_car_year_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/car_year_tv"
+            app:layout_constraintStart_toEndOf="@+id/car_year_tv"
+            app:layout_constraintTop_toTopOf="@+id/car_year_tv" />
+        <TextView
+            android:textSize="18sp"
+            android:id="@+id/exact_engine_cap_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/engine_cap_tv"
+            app:layout_constraintStart_toEndOf="@+id/engine_cap_tv"
+            app:layout_constraintTop_toTopOf="@+id/engine_cap_tv" />
+        <TextView
+            android:textSize="18sp"
+            android:id="@+id/exact_insert_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/insert_date_tv"
+            app:layout_constraintStart_toEndOf="@+id/insert_date_tv"
+            app:layout_constraintTop_toTopOf="@+id/insert_date_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

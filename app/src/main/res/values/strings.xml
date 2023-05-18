@@ -2,9 +2,11 @@
     <string name="app_name">AutoLibrary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="car_add_text">Добавить авто</string>
+    <string name="car_add_text">Добавление авто</string>
     <string name="car_name_text">Наименование</string>
     <string name="car_year">Год выпуска</string>
     <string name="car_engine_cap">Ёмкость двигателя</string>
-    <string name="add_photo_text">Добавить текст</string>
+    <string name="add_photo_text">Добавить фото</string>
+    <string name="add_car_text">Сохранить авто</string>
+    <string name="insert_date_text">Дата добавления</string>
 </resources>
