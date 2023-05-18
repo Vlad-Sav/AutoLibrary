@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kg.android.autolibrary.data.models.Car
+import kg.android.autolibrary.data.models.UserPermissions
 import kg.android.autolibrary.data.repository.CarsRepository
 import kg.android.autolibrary.ui.addcar.AddCarResult
 import kg.android.autolibrary.ui.addcar.AddCarState
@@ -24,6 +25,7 @@ class CarsViewModel @Inject constructor(
 ): ViewModel() {
     var state = MutableLiveData<AddCarState>()
     lateinit var cars: LiveData<List<Car>>
+    lateinit var perms: LiveData<List<UserPermissions>>
 
     private val resultChannel = Channel<AddCarResult<Unit>>()
     val addCarResult = resultChannel.receiveAsFlow()
@@ -73,6 +75,23 @@ class CarsViewModel @Inject constructor(
             catch (e: Exception){
                 resultChannel.send(AddCarResult.Error(e.message ?: "Unknown error"))
             }
+        }
+    }
+    fun readUserPermissions(){
+        perms = repository.readUserPermissions
+    }
+
+    fun resetSettings(userPermissions: UserPermissions){
+        viewModelScope.launch {
+
+            //try {
+                repository.resetSettings(userPermissions)
+
+               // resultChannel.send(AddCarResult.Added())
+            //}
+            //catch (e: Exception){
+               // resultChannel.send(AddCarResult.Error(e.message ?: "Unknown error"))
+            //}
         }
     }
 }

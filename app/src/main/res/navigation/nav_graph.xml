@@ -19,12 +19,20 @@
         <action
             android:id="@+id/action_carsFragment_to_carDetailsFragment"
             app:destination="@id/carDetailsFragment" />
+        <argument
+            android:name="resetSettings"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="kg.android.autolibrary.ui.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_carsFragment"
+            app:destination="@id/carsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addCarFragment"
         android:name="kg.android.autolibrary.ui.addcar.AddCarFragment"
