@@ -37,5 +37,9 @@
         android:id="@+id/carDetailsFragment"
         android:name="kg.android.autolibrary.ui.cardetails.CarDetailsFragment"
         android:label="fragment_car_details"
-        tools:layout="@layout/fragment_car_details" />
+        tools:layout="@layout/fragment_car_details" >
+        <argument
+            android:name="car"
+            app:argType="kg.android.autolibrary.data.models.Car" />
+    </fragment>
 </navigation>

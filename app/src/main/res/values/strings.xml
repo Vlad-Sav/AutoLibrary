@@ -9,4 +9,6 @@
     <string name="add_photo_text">Добавить фото</string>
     <string name="add_car_text">Сохранить авто</string>
     <string name="insert_date_text">Дата добавления</string>
+    <string name="preference_title">Вернуть настройки по умолчанию</string>
+    <string name="preference_summary">При возвращении настроек в исходное положение, сбросится платная подписка и вернутся пробные попытки на функции</string>
 </resources>
