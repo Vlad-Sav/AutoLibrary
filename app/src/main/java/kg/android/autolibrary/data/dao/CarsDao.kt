@@ -13,10 +13,10 @@ interface CarsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCar(car: Car)
 
-    @Query("SELECT * FROM cars ORDER BY name ASC")
+    @Query("SELECT * FROM cars ORDER BY id ASC")
     fun readAllCars(): LiveData<List<Car>>
 
-    @Query("SELECT * FROM cars WHERE id=:arg0")
+    @Query("SELECT * FROM cars WHERE id=:id")
     fun readCar(id: Int): LiveData<Car>
 
     @Query("SELECT * FROM userPermissions")

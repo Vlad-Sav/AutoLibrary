@@ -7,7 +7,7 @@ import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.data.models.UserPermissions
 
 class CarsRepository(private val carsDao: CarsDao) {
-    fun readAllCars(): LiveData<List<Car>> = carsDao.readAllCars()
+    val readAllCars: LiveData<List<Car>> = carsDao.readAllCars()
 
     fun readCar(id: Int): LiveData<Car> = carsDao.readCar(id)
 
