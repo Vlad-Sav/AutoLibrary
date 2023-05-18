@@ -1,23 +1,20 @@
 package kg.android.autolibrary.ui.cars
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kg.android.autolibrary.R
+import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.databinding.FragmentCarsBinding
-import kg.android.autolibrary.ui.addcar.AddCarUiEvent
+import kg.android.autolibrary.ui.addcar.AddCarFragmentDirections
 
 @AndroidEntryPoint
-class CarsFragment : Fragment(), IOnCarItemClicked {
+class CarsFragment : Fragment(), OnCarItemClicked {
     private lateinit var viewModel: CarsViewModel
     private var _binding: FragmentCarsBinding? = null
     private val binding get() = _binding!!
@@ -52,9 +49,9 @@ class CarsFragment : Fragment(), IOnCarItemClicked {
         findNavController().navigate(directions)
     }
 
-    override fun onCarItemClicked(id: Int) {
-
+    override fun onCarItemClicked(car: Car) {
+        val directions =
+            CarsFragmentDirections.actionCarsFragmentToCarDetailsFragment(car)
+        findNavController().navigate(directions)
     }
-
-
 }

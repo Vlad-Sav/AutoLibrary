@@ -10,13 +10,14 @@
         android:padding="16dp">
 
         <ImageView
+            android:scaleType="fitCenter"
             android:id="@+id/car_iv"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_car" />
+            android:src="@drawable/ic_car" />
 
         <TextView
             android:textColor="@color/black"

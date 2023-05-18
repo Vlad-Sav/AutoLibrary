@@ -32,6 +32,7 @@ class AddCarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initializeEditText()
         binding.btnAddCar.setOnClickListener{ addCarOnClick() }
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addCarResult.collect { result ->
                 when (result) {
