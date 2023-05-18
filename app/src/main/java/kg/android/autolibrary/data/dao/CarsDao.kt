@@ -1,10 +1,7 @@
 package kg.android.autolibrary.data.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.data.models.UserPermissions
 
@@ -13,6 +10,9 @@ interface CarsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addCar(car: Car)
 
+    @Update
+    suspend fun updateUserPermissions(userPermissions: UserPermissions)
+
     @Query("SELECT * FROM cars ORDER BY id ASC")
     fun readAllCars(): LiveData<List<Car>>
 
@@ -20,5 +20,5 @@ interface CarsDao {
     fun readCar(id: Int): LiveData<Car>
 
     @Query("SELECT * FROM userPermissions")
-    fun readUserPermissions(): LiveData<UserPermissions>
+    fun readUserPermissions(): LiveData<List<UserPermissions>>
 }

@@ -11,9 +11,17 @@ class CarsRepository(private val carsDao: CarsDao) {
 
     fun readCar(id: Int): LiveData<Car> = carsDao.readCar(id)
 
-    fun readUserPermissions(): LiveData<UserPermissions> = carsDao.readUserPermissions()
+    val readUserPermissions: LiveData<List<UserPermissions>> = carsDao.readUserPermissions()
 
     suspend fun addCar(car: Car) {
         carsDao.addCar(car)
+    }
+
+    suspend fun resetSettings(userPermissions: UserPermissions) {
+        val res = userPermissions.copy(
+            freeAddCount = 2,
+            freeViewCount = 3,
+            hasBoughtSubs = 0)
+        carsDao.updateUserPermissions(res)
     }
 }

@@ -2,7 +2,8 @@
 <PreferenceScreen
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Preference
-        app:key="preference_key"
+        app:key="reset_settings"
         app:title="@string/preference_title"
-        app:summary="@string/preference_summary" />
+        app:summary="@string/preference_summary"
+        app:icon="@drawable/ic_restore"/>
 </PreferenceScreen>
