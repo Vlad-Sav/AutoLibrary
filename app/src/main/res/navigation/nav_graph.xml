@@ -29,7 +29,11 @@
         android:id="@+id/addCarFragment"
         android:name="kg.android.autolibrary.ui.settings.SettingsFragment"
         android:label="fragment_add_car"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <argument
+            android:name="carId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/carDetailsFragment"
         android:name="kg.android.autolibrary.ui.cardetails.CarDetailsFragment"
