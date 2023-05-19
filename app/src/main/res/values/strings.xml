@@ -13,4 +13,8 @@
     <string name="preference_summary">При возвращении настроек в исходное положение, сбросится платная подписка и вернутся пробные попытки на функции</string>
     <string name="settings_title">Настройки</string>
     <string name="search_text">Найти</string>
+    <string name="buy_dialog_title">Купите подписку!</string>
+    <string name="buy_dialog_description">С покупкой подписки все функции станут доступны без ограничений на период в месяц</string>
+    <string name="buy_dialog_positive">Купить</string>
+    <string name="buy_dialog_negative">Отмена</string>
 </resources>

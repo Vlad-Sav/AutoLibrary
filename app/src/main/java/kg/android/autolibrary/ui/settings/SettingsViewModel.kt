@@ -24,8 +24,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val repository: CarsRepository
 ): ViewModel() {
-
-    lateinit var perms: LiveData<List<UserPermissions>>
+    lateinit var perms: LiveData<UserPermissions>
 
     private val resultChannel = Channel<ResetSettingsResult<Unit>>()
     val resetSettingsResult = resultChannel.receiveAsFlow()
@@ -34,18 +33,27 @@ class SettingsViewModel @Inject constructor(
         readUserPermissions()
     }
 
+    /**
+     * SettingsFragment events processor
+     */
     fun onSettingsEvent(event: SettingsUiEvent) {
         when(event) {
             is SettingsUiEvent.ResetSettings -> {
-                resetSettings(perms.value!![0])
+                resetSettings(perms.value!!)
             }
         }
     }
 
-    fun readUserPermissions(){
+    /**
+     * Getting user permissions model
+     */
+    private fun readUserPermissions(){
         perms = repository.readUserPermissions
     }
 
+    /**
+     * Settings reset in database
+     */
     fun resetSettings(userPermissions: UserPermissions){
         viewModelScope.launch {
             try {

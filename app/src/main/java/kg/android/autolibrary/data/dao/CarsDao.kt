@@ -21,8 +21,5 @@ interface CarsDao {
     fun readCar(id: Int): LiveData<Car>
 
     @Query("SELECT * FROM userPermissions")
-    fun readUserPermissions(): LiveData<List<UserPermissions>>
-
-    @Query("SELECT * FROM cars WHERE name LIKE :searchQuery")
-    fun searchCar(searchQuery: String): Flow<List<Car>>
+    fun readUserPermissions(): LiveData<UserPermissions>
 }

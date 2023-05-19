@@ -29,7 +29,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
         pref?.setOnPreferenceClickListener {
             viewModel.perms.observe(viewLifecycleOwner) { perms ->
                 if(perms != null){
-                    viewModel.resetSettings(viewModel.perms.value!![0])
+                    viewModel.resetSettings(viewModel.perms.value!!)
                 }
             }
             true
@@ -39,6 +39,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        //Listening to result of settings reset in database
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.resetSettingsResult.collect { result ->
                 when (result) {
