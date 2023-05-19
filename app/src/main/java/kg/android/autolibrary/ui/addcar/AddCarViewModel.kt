@@ -44,6 +44,9 @@ class AddCarViewModel @Inject constructor(
             is AddCarUiEvent.EngineCapacityChanged -> {
                 state.value = state.value?.copy(engineCap = event.value)
             }
+            is AddCarUiEvent.PhotoChanged -> {
+                state.value = state.value?.copy(photo = event.value)
+            }
             is AddCarUiEvent.AddCar -> {
                 addCar()
             }
@@ -67,7 +70,7 @@ class AddCarViewModel @Inject constructor(
                     Car(
                         0,
                         state.value?.carName ?: "",
-                        "",
+                        state.value?.photo ?: "",
                         state.value?.releaseYear?.toInt() ?: 0,
                         state.value?.engineCap?.toDouble() ?: 0.0,
                         formatted)

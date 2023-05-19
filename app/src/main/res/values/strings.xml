@@ -17,4 +17,6 @@
     <string name="buy_dialog_description">С покупкой подписки все функции станут доступны без ограничений на период в месяц</string>
     <string name="buy_dialog_positive">Купить</string>
     <string name="buy_dialog_negative">Отмена</string>
+    <string name="subscription_purchased">Подписка приобретена</string>
+    <string name="photo_load_error">Не удалось загрузить изображение</string>
 </resources>
