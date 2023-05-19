@@ -1,9 +1,6 @@
 package kg.android.autolibrary.ui.cars
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.data.models.UserPermissions
@@ -51,6 +48,17 @@ class CarsViewModel @Inject constructor(
         }
     }
 
+    fun onCarsEvent(event: CarsUiEvent) {
+        when(event) {
+            is CarsUiEvent.SearchCars -> {
+                searchCars(event.value)
+            }
+            is CarsUiEvent.UpdateUserPermissions -> {
+                updateUserPermissions()
+            }
+        }
+    }
+
     fun readAllCars() {
         cars = repository.readAllCars
     }
@@ -77,21 +85,18 @@ class CarsViewModel @Inject constructor(
             }
         }
     }
+
     fun readUserPermissions(){
         perms = repository.readUserPermissions
     }
 
-    fun resetSettings(userPermissions: UserPermissions){
+    fun updateUserPermissions(){
         viewModelScope.launch {
-
-            //try {
-                repository.resetSettings(userPermissions)
-
-               // resultChannel.send(AddCarResult.Added())
-            //}
-            //catch (e: Exception){
-               // resultChannel.send(AddCarResult.Error(e.message ?: "Unknown error"))
-            //}
+            repository.updateUserPermissions(perms.value!![0])
         }
+    }
+
+    fun searchCars(query: String):LiveData<List<Car>>{
+        return repository.searchCar(query).asLiveData()
     }
 }

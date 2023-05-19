@@ -21,17 +21,41 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SettingsFragment: PreferenceFragmentCompat() {
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
         val pref: Preference? = findPreference("reset_settings")
         pref?.setOnPreferenceClickListener {
-            val directions = SettingsFragmentDirections
-                .actionSettingsFragmentToCarsFragment().setResetSettings(true)
-            findNavController().navigate(directions)
+            viewModel.perms.observe(viewLifecycleOwner) { perms ->
+                if(perms != null){
+                    viewModel.resetSettings(viewModel.perms.value!![0])
+                }
+            }
             true
         }
-
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.resetSettingsResult.collect { result ->
+                when (result) {
+                    is ResetSettingsResult.ResetSucceed -> {
+                        val directions = SettingsFragmentDirections
+                            .actionSettingsFragmentToCarsFragment()
+                        findNavController().navigate(directions)
+                    }
+                    is ResetSettingsResult.Error -> {
+                        Toast.makeText(
+                            context,
+                            result.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
 }

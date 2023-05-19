@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.data.models.UserPermissions
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CarsDao {
@@ -21,4 +22,7 @@ interface CarsDao {
 
     @Query("SELECT * FROM userPermissions")
     fun readUserPermissions(): LiveData<List<UserPermissions>>
+
+    @Query("SELECT * FROM cars WHERE name LIKE :searchQuery")
+    fun searchCar(searchQuery: String): Flow<List<Car>>
 }

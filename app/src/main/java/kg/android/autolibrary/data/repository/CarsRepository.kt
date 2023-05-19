@@ -5,16 +5,19 @@ import androidx.room.Query
 import kg.android.autolibrary.data.dao.CarsDao
 import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.data.models.UserPermissions
+import kotlinx.coroutines.flow.Flow
 
 class CarsRepository(private val carsDao: CarsDao) {
     val readAllCars: LiveData<List<Car>> = carsDao.readAllCars()
-
-    fun readCar(id: Int): LiveData<Car> = carsDao.readCar(id)
 
     val readUserPermissions: LiveData<List<UserPermissions>> = carsDao.readUserPermissions()
 
     suspend fun addCar(car: Car) {
         carsDao.addCar(car)
+    }
+
+    suspend fun updateUserPermissions(userPermissions: UserPermissions) {
+        carsDao.updateUserPermissions(userPermissions)
     }
 
     suspend fun resetSettings(userPermissions: UserPermissions) {
@@ -24,4 +27,6 @@ class CarsRepository(private val carsDao: CarsDao) {
             hasBoughtSubs = 0)
         carsDao.updateUserPermissions(res)
     }
+
+    fun searchCar(searchQuery: String): Flow<List<Car>> = carsDao.searchCar(searchQuery)
 }
