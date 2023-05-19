@@ -12,4 +12,5 @@
     <string name="preference_title">Вернуть настройки по умолчанию</string>
     <string name="preference_summary">При возвращении настроек в исходное положение, сбросится платная подписка и вернутся пробные попытки на функции</string>
     <string name="settings_title">Настройки</string>
+    <string name="search_text">Найти</string>
 </resources>

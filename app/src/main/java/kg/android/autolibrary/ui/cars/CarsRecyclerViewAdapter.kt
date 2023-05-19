@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.android.autolibrary.R
 import kg.android.autolibrary.data.models.Car
 
-class CarsRecyclerViewAdapter(private val cars: List<Car>,
+class CarsRecyclerViewAdapter(private var cars: List<Car>,
                               private val onCarItemClicked: OnCarItemClicked
                               ): RecyclerView.Adapter<CarsRecyclerViewAdapter.CarViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
@@ -19,6 +19,11 @@ class CarsRecyclerViewAdapter(private val cars: List<Car>,
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         holder.bind(cars[position], onCarItemClicked)
+    }
+
+    fun filteredList(filteredList: List<Car>) {
+        cars = filteredList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

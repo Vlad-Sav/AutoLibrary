@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class UserPermissions(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val freeAddCount: Int,
-    val freeViewCount: Int,
-    val hasBoughtSubs: Int
+    var freeAddCount: Int,
+    var freeViewCount: Int,
+    var hasBoughtSubs: Int
     )
