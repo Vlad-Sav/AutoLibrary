@@ -53,7 +53,7 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
         viewModel.readUserPermissions()
         viewModel.perms.observe(viewLifecycleOwner) { perms ->
             if(perms != null){
-                userPermissions = perms[0]
+                userPermissions = perms
             }
         }
     }
@@ -93,7 +93,7 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.nav_menu, menu)
-                val search = menu?.findItem(R.id.menu_search)
+                val search = menu.findItem(R.id.menu_search)
                 val searchView = search?.actionView as? SearchView
                 searchView?.isSubmitButtonEnabled = true
                 searchView?.setOnQueryTextListener(this@CarsFragment)

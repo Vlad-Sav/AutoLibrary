@@ -21,7 +21,7 @@ class CarsViewModel @Inject constructor(
     private val repository: CarsRepository
 ): ViewModel() {
     lateinit var cars: LiveData<List<Car>>
-    lateinit var perms: LiveData<List<UserPermissions>>
+    lateinit var perms: LiveData<UserPermissions>
 
     /**
      * CarsFragment events processor
@@ -53,7 +53,7 @@ class CarsViewModel @Inject constructor(
      */
     private fun updateUserPermissions(){
         viewModelScope.launch {
-            repository.updateUserPermissions(perms.value!![0])
+            repository.updateUserPermissions(perms.value!!)
         }
     }
 }

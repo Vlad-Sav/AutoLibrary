@@ -43,7 +43,7 @@ class AddCarFragment : Fragment() {
         viewModel.readUserPermissions()
         viewModel.perms.observe(viewLifecycleOwner) { perms ->
             if(perms != null){
-                userPermissions = perms[0]
+                userPermissions = perms
             }
         }
         //Listening to result of adding car to database

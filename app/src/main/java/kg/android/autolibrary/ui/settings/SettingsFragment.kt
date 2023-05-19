@@ -29,7 +29,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
         pref?.setOnPreferenceClickListener {
             viewModel.perms.observe(viewLifecycleOwner) { perms ->
                 if(perms != null){
-                    viewModel.resetSettings(viewModel.perms.value!![0])
+                    viewModel.resetSettings(viewModel.perms.value!!)
                 }
             }
             true

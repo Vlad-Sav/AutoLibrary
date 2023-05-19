@@ -22,8 +22,7 @@ class AddCarViewModel @Inject constructor(
     private val repository: CarsRepository
 ): ViewModel() {
     var state = MutableLiveData<AddCarState>()
-    lateinit var perms: LiveData<List<UserPermissions>>
-
+    lateinit var perms: LiveData<UserPermissions>
     private val resultChannel = Channel<AddCarResult<Unit>>()
     val addCarResult = resultChannel.receiveAsFlow()
 
@@ -93,7 +92,7 @@ class AddCarViewModel @Inject constructor(
      */
     fun updateUserPermissions(){
         viewModelScope.launch {
-            repository.updateUserPermissions(perms.value!![0])
+            repository.updateUserPermissions(perms.value!!)
         }
     }
 }

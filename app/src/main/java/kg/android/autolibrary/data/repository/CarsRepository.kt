@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 class CarsRepository(private val carsDao: CarsDao) {
     val readAllCars: LiveData<List<Car>> = carsDao.readAllCars()
 
-    val readUserPermissions: LiveData<List<UserPermissions>> = carsDao.readUserPermissions()
+    val readUserPermissions: LiveData<UserPermissions> = carsDao.readUserPermissions()
 
     suspend fun addCar(car: Car) {
         carsDao.addCar(car)

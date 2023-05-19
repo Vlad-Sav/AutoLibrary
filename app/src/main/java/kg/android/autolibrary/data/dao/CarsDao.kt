@@ -21,5 +21,5 @@ interface CarsDao {
     fun readCar(id: Int): LiveData<Car>
 
     @Query("SELECT * FROM userPermissions")
-    fun readUserPermissions(): LiveData<List<UserPermissions>>
+    fun readUserPermissions(): LiveData<UserPermissions>
 }
