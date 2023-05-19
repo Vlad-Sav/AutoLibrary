@@ -17,6 +17,7 @@ import kg.android.autolibrary.R
 import kg.android.autolibrary.data.models.Car
 import kg.android.autolibrary.data.models.UserPermissions
 import kg.android.autolibrary.databinding.FragmentCarsBinding
+import kg.android.autolibrary.ui.base.DialogBuilder
 
 @AndroidEntryPoint
 class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListener {
@@ -57,6 +58,9 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
         }
     }
 
+    /**
+     * On item click listener for CarsRecyclerView
+     */
     override fun onCarItemClicked(car: Car) {
         if(userPermissions?.freeViewCount ?: 0 > 0 || userPermissions?.hasBoughtSubs ?: 0 == 1){
             userPermissions!!.freeViewCount--
@@ -65,15 +69,25 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
                 CarsFragmentDirections.actionCarsFragmentToCarDetailsFragment(car)
             findNavController().navigate(directions)
         }
-        else buildDialog()
+        else DialogBuilder().buildDialog(requireContext()){
+            userPermissions!!.hasBoughtSubs = 1
+            viewModel.onCarsEvent(CarsUiEvent.UpdateUserPermissions)
+            Toast.makeText(requireContext(), "Подписка приобретена", Toast.LENGTH_SHORT).show()
+        }
     }
 
+    /**
+     * Click listener for Add Car Button
+     */
     private fun addCarOnClick(){
         val directions =
             CarsFragmentDirections.actionCarsFragmentToAddCarFragment()
         findNavController().navigate(directions)
     }
 
+    /**
+     * App bar menu setting up
+     */
     private fun setUpMenu(){
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
@@ -98,20 +112,9 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun buildDialog(){
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Купите подписку!")
-        builder.setMessage("С покупкой подписки все функции станут доступны без ограничений на период в месяц")
-        builder.setPositiveButton("Купить") { dialog, which ->
-            userPermissions!!.hasBoughtSubs = 1
-            viewModel.onCarsEvent(CarsUiEvent.UpdateUserPermissions)
-            Toast.makeText(requireContext(), "Подписка приобретена", Toast.LENGTH_SHORT).show()
-        }
-        builder.setNegativeButton("Отмена") { dialog, which ->
-        }
-        builder.show()
-    }
-
+    /**
+     * Search view method implementation
+     */
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(!query.isNullOrEmpty()){
             searchCars(query)
@@ -119,6 +122,9 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
         return true
     }
 
+    /**
+     * Search view method implementation
+     */
     override fun onQueryTextChange(newText: String?): Boolean {
         if(!newText.isNullOrEmpty()){
             searchCars(newText)
@@ -126,6 +132,11 @@ class CarsFragment : Fragment(), OnCarItemClicked, SearchView.OnQueryTextListene
         return true
     }
 
+    /**
+     * Logic for searching car by name
+     *
+     * @param query - pattern for searching
+     */
     private fun searchCars(query: String) {
         if(!viewModel.cars.value.isNullOrEmpty()){
             val searchQuery = ".*$query.*"

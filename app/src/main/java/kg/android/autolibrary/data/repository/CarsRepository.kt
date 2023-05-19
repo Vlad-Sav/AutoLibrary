@@ -27,6 +27,4 @@ class CarsRepository(private val carsDao: CarsDao) {
             hasBoughtSubs = 0)
         carsDao.updateUserPermissions(res)
     }
-
-    fun searchCar(searchQuery: String): Flow<List<Car>> = carsDao.searchCar(searchQuery)
 }

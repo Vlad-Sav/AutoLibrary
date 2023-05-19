@@ -12,14 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kg.android.autolibrary.data.models.UserPermissions
 import kg.android.autolibrary.databinding.FragmentAddCarBinding
+import kg.android.autolibrary.ui.base.DialogBuilder
 import kg.android.autolibrary.ui.cars.CarsFragmentDirections
 import kg.android.autolibrary.ui.cars.CarsUiEvent
 import kg.android.autolibrary.ui.cars.CarsViewModel
 
+@AndroidEntryPoint
 class AddCarFragment : Fragment() {
-    private lateinit var viewModel: CarsViewModel
+    private lateinit var viewModel: AddCarViewModel
     private var _binding: FragmentAddCarBinding? = null
     private val binding get() = _binding!!
     private var userPermissions: UserPermissions? = null
@@ -29,7 +32,7 @@ class AddCarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddCarBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(requireActivity()).get(CarsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AddCarViewModel::class.java)
         return binding.root
     }
 
@@ -43,6 +46,7 @@ class AddCarFragment : Fragment() {
                 userPermissions = perms[0]
             }
         }
+        //Listening to result of adding car to database
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addCarResult.collect { result ->
                 when (result) {
@@ -63,31 +67,25 @@ class AddCarFragment : Fragment() {
         }
     }
 
+    /**
+     * Click listener for Add Car Button
+     */
     private fun addCarOnClick(){
         if(userPermissions?.freeAddCount ?: 0 > 0 || userPermissions?.hasBoughtSubs ?: 0 == 1){
             userPermissions!!.freeAddCount--
-            viewModel.onCarsEvent(CarsUiEvent.UpdateUserPermissions)
+            viewModel.onAddCarEvent(AddCarUiEvent.UpdateUserPermissions)
             viewModel.onAddCarEvent(AddCarUiEvent.AddCar)
         }
-        else buildDialog()
-    }
-
-    fun buildDialog(){
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Купите подписку!")
-        builder.setMessage("С покупкой подписки все функции станут доступны без ограничений на период в месяц")
-
-        builder.setPositiveButton("Купить") { dialog, which ->
+        else  DialogBuilder().buildDialog(requireContext()){
             userPermissions!!.hasBoughtSubs = 1
-            viewModel.onCarsEvent(CarsUiEvent.UpdateUserPermissions)
+            viewModel.onAddCarEvent(AddCarUiEvent.UpdateUserPermissions)
             Toast.makeText(requireContext(), "Подписка приобретена", Toast.LENGTH_SHORT).show()
         }
-
-        builder.setNegativeButton("Отмена") { dialog, which ->
-        }
-        builder.show()
     }
 
+    /**
+     * Linking edit texts from ui with object that represents state of those edit texts
+     */
     private fun initializeEditText(){
         binding.etCarName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

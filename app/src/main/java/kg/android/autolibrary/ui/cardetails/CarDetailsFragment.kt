@@ -25,6 +25,7 @@ class CarDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCarDetailsBinding.inflate(inflater, container, false)
+        //Getting model from args
         val bundle = arguments ?: return binding.root
         val args = CarDetailsFragmentArgs.fromBundle(bundle)
         car = args.car
@@ -49,7 +50,6 @@ class CarDetailsFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-
         }
     }
 }
